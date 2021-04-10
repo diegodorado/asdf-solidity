@@ -50,21 +50,18 @@ install_version() {
   local version="$2"
   local install_path="$3"
 
+  echo "PATH: $install_path"
   if [ "$install_type" != "version" ]; then
     fail "asdf-$TOOL_NAME supports release installs only"
   fi
 
-  # TODO: Adapt this to proper extension and adapt extracting strategy.
-  local release_file="$install_path/$TOOL_NAME-$version.tar.gz"
   (
-    mkdir -p "$install_path"
-    download_release "$version" "$release_file"
-    tar -xzf "$release_file" -C "$install_path" --strip-components=1 || fail "Could not extract $release_file"
-    rm "$release_file"
+    mkdir -p "$install_path/bin"
+    local tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+    local release_file="$install_path/bin/$tool_cmd"
 
-    # TODO: Asert solidity executable exists.
-    local tool_cmd
-    tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+    download_release "$version" "$release_file"
+
     test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
     echo "$TOOL_NAME $version installation was successful!"
