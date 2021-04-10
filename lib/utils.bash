@@ -38,7 +38,6 @@ download_release() {
   local version filename url
   version="$1"
   filename="$2"
-
   url="$GH_REPO/releases/download/v${version}/solc-static-linux"
 
   echo "* Downloading $TOOL_NAME release $version..."
@@ -61,6 +60,7 @@ install_version() {
     local release_file="$install_path/bin/$tool_cmd"
 
     download_release "$version" "$release_file"
+    chmod -x "$install_path/bin/$tool_cmd" || fail "Could not chmod +x $install_path/bin/$tool_cmd."
 
     test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
