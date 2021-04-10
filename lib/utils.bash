@@ -60,7 +60,7 @@ install_version() {
     local bin_file="$install_path/bin/$tool_cmd"
 
     download_release "$version" "$bin_file"
-    chmod -x "$install_path/bin/$tool_cmd" || fail "Could not chmod +x $install_path/bin/$tool_cmd."
+    chmod +x "$install_path/bin/$tool_cmd" || fail "Could not chmod +x $install_path/bin/$tool_cmd."
 
     ls -la "$install_path/bin"
 
