@@ -6,12 +6,12 @@ TOOL_NAME="solidity"
 TOOL_TEST="solc --version"
 
 case $(uname -s) in
-  'Linux')
-    OS="linux-amd64"
-    ;;
-  'Darwin')
-    OS="macosx-amd64"
-    ;;
+'Linux')
+  OS="linux-amd64"
+  ;;
+'Darwin')
+  OS="macosx-amd64"
+  ;;
 esac
 
 LIST_URL="https://raw.githubusercontent.com/ethereum/solc-bin/gh-pages/$OS/list.txt"
@@ -29,7 +29,7 @@ sort_versions() {
 }
 
 list_all_versions() {
-  curl -s "$LIST_URL" | sed -e 's/.*v//' -e 's/+.*//' 
+  curl -s "$LIST_URL" | sed -e 's/.*v//' -e 's/+.*//'
 }
 
 download_release() {

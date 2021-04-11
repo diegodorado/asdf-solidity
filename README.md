@@ -1,23 +1,19 @@
-<div align="center">
-
-# asdf-solidity ![Build](https://github.com/diegodorado/asdf-solidity/workflows/Build/badge.svg) ![Lint](https://github.com/diegodorado/asdf-solidity/workflows/Lint/badge.svg)
+# asdf-solidity
+[![Build Status](https://api.travis-ci.com/diegodorado/asdf-solidity.svg)](https://travis-ci.com/github/diegodorado/asdf-solidity)
 
 [solidity](https://docs.soliditylang.org/en/latest/) plugin for the [asdf version manager](https://asdf-vm.com).
 
-</div>
 
 # Contents
 
 - [Dependencies](#dependencies)
 - [Install](#install)
-- [Why?](#why)
 - [Contributing](#contributing)
 - [License](#license)
 
 # Dependencies
 
-- `bash`, `curl`, `tar`: generic POSIX utilities.
-- `SOME_ENV_VAR`: set this environment variable in your shell config to load the correct version of tool x.
+- `bash`, `curl`, `sed`, `grep`, `awk`: generic POSIX utilities.
 
 # Install
 
@@ -52,7 +48,15 @@ install & manage versions.
 
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
-[Thanks goes to these contributors](https://github.com/diegodorado/asdf-solidity/graphs/contributors)!
+Testing Locally:
+
+```shell
+asdf plugin test solidity . solc --version
+
+```
+
+Tests are automatically run in GitHub Actions on push and PR.
+
 
 # License
 
