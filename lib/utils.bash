@@ -6,12 +6,12 @@ TOOL_NAME="solidity"
 TOOL_TEST="solc --version"
 
 case $(uname -s) in
-'Linux')
-  OS="linux-amd64"
-  ;;
-'Darwin')
-  OS="macosx-amd64"
-  ;;
+  'Linux')
+    OS="linux-amd64"
+    ;;
+  'Darwin')
+    OS="macosx-amd64"
+    ;;
 esac
 
 LIST_URL="https://raw.githubusercontent.com/ethereum/solc-bin/gh-pages/$OS/list.txt"
