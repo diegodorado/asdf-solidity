@@ -9,7 +9,6 @@
 - [Dependencies](#dependencies)
 - [Install](#install)
 - [Contributing](#contributing)
-- [License](#license)
 
 # Dependencies
 
@@ -44,7 +43,7 @@ install & manage versions.
 
 # Contributing
 
-Contributions of any kind welcome! See the [contributing guide](contributing.md).
+Contributions of any kind welcome!
 
 Testing Locally:
 
@@ -53,9 +52,5 @@ asdf plugin test solidity . solc --version
 
 ```
 
-Tests are automatically run in GitHub Actions on push and PR.
+Tests are automatically run on push.
 
-
-# License
-
-See [LICENSE](LICENSE) © [Diego Dorado](https://github.com/diegodorado/)
