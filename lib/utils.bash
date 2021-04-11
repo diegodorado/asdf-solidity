@@ -2,9 +2,19 @@
 
 set -euo pipefail
 
-GH_REPO="https://github.com/ethereum/solidity"
 TOOL_NAME="solidity"
 TOOL_TEST="solc --version"
+
+case $(uname -s) in
+  'Linux')
+    OS="linux-amd64"
+    ;;
+  'Darwin')
+    OS="macosx-amd64"
+    ;;
+esac
+
+LIST_URL="https://raw.githubusercontent.com/ethereum/solc-bin/gh-pages/$OS/list.txt"
 
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
@@ -13,34 +23,23 @@ fail() {
 
 curl_opts=(-fsSL)
 
-# NOTE: You might want to remove this if solidity is not hosted on GitHub releases.
-if [ -n "${GITHUB_API_TOKEN:-}" ]; then
-  curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
-fi
-
 sort_versions() {
   sed 'h; s/[+-]/./g; s/.p\([[:digit:]]\)/.z\1/; s/$/.z/; G; s/\n/ /' |
     LC_ALL=C sort -t. -k 1,1 -k 2,2n -k 3,3n -k 4,4n -k 5,5n | awk '{print $2}'
 }
 
-list_github_tags() {
-  git ls-remote --tags --refs "$GH_REPO" |
-    grep -o 'refs/tags/.*' | cut -d/ -f3- |
-    grep -E '^v' |
-    sed 's/^v//'
-}
-
 list_all_versions() {
-  list_github_tags
+  curl -s "$LIST_URL" | sed -e 's/.*v//' -e 's/+.*//' 
 }
 
 download_release() {
   local version filename url
   version="$1"
   filename="$2"
-  url="$GH_REPO/releases/download/v${version}/solc-static-linux"
+  file=$(curl -s "$LIST_URL" | grep "solc-$OS-v$version" | sed 's/+/%2B/')
+  url="https://github.com/ethereum/solc-bin/raw/gh-pages/$OS/$file"
 
-  echo "* Downloading $TOOL_NAME release $version..."
+  echo "* Downloading $TOOL_NAME release $version from $url ..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
