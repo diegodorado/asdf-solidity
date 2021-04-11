@@ -48,7 +48,6 @@ install_version() {
   local version="$2"
   local install_path="$3"
 
-  echo "PATH: $install_path"
   if [ "$install_type" != "version" ]; then
     fail "asdf-$TOOL_NAME supports release installs only"
   fi
@@ -60,8 +59,6 @@ install_version() {
 
     download_release "$version" "$bin_file"
     chmod +x "$install_path/bin/$tool_cmd" || fail "Could not chmod +x $install_path/bin/$tool_cmd."
-
-    ls -la "$install_path/bin"
 
     test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
