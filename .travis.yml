@@ -1,0 +1,9 @@
+language: bash
+script: asdf plugin test solidity . --asdf-plugin-gitref HEAD solc --version
+before_script:
+  - git clone https://github.com/asdf-vm/asdf.git
+  - . asdf/asdf.sh
+osx_image: xcode8.2
+os:
+  - linux
+  - osx
