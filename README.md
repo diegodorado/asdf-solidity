@@ -19,6 +19,11 @@
 Plugin:
 
 ```shell
+asdf plugin add solidity
+```
+
+Or:
+```shell
 asdf plugin add solidity https://github.com/diegodorado/asdf-solidity.git
 ```
 
